@@ -49,7 +49,7 @@ public class LinkedListOperations {
 		
 		System.out.println("=========================================");
 		System.out.println("*********** insert Method ************");
-		create();
+		//create();
 		
 
 	}
