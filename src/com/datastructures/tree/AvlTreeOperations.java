@@ -28,7 +28,7 @@ public class AvlTreeOperations {
 		return (a > b) ? a : b;
 	}
 
-	NodeAVl rightRotate(NodeAVl y) {
+	NodeAVl rightRotate(NodeAVl y) { //LL Rotation
 		NodeAVl x = y.left;
 		NodeAVl T2 = x.right;
 		x.right = y;
@@ -38,7 +38,7 @@ public class AvlTreeOperations {
 		return x;
 	}
 
-	NodeAVl leftRotate(NodeAVl x) {
+	NodeAVl leftRotate(NodeAVl x) { //RR Rotation
 		NodeAVl y = x.right;
 		NodeAVl T2 = y.left;
 		y.left = x;

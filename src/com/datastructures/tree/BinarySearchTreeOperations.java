@@ -77,8 +77,8 @@ public class BinarySearchTreeOperations {
 			// If the node has two children
 			// Place the inorder successor in position of the node to be deleted
 			root.key = minValue(root.right);
-			
-			System.out.println("< Min Value > .... "+root.key +"rootright-> "+ root.right.key);
+
+			System.out.println("< Min Value > .... " + root.key + "rootright-> " + root.right.key);
 			// Delete the inorder successor
 			root.right = deleteRec(root.right, root.key);
 		}
@@ -89,7 +89,7 @@ public class BinarySearchTreeOperations {
 	// Find the inorder successor
 	int minValue(Node root) {
 		int minv = root.key;
-		System.out.println("minv:-> "+minv);
+		System.out.println("minv:-> " + minv);
 
 		while (root.left != null) {
 			minv = root.left.key;
@@ -98,28 +98,61 @@ public class BinarySearchTreeOperations {
 		return minv;
 	}
 
+	void rightView() {
+
+		rightViewOfBinaryTree(root);
+
+	}
+
+	void lefttView() {
+
+		leftViewOfBinaryTree(root);
+
+	}
+
+	void rightViewOfBinaryTree(Node root) { //recursive
+		if (root != null) {
+			System.out.println("right view -> " + root.key);
+			rightViewOfBinaryTree(root.right);
+ 		}
+
+	}
+
+	void leftViewOfBinaryTree(Node root) { //non_recursive
+		while(root != null) {		
+			System.out.println("left view ->" + root.key);
+ 			root=root.left;
+		}
+
+	}
+
 	// Driver Program to test above functions
+
+//	(a) Inorder (Left, Root, Right) : 4 2 5 1 3 
+//	(b) Preorder (Root, Left, Right) : 1 2 4 5 3 
+//	(c) Postorder (Left, Right, Root) : 4 5 2 3 1
 	public static void main(String[] args) {
 		BinarySearchTreeOperations tree = new BinarySearchTreeOperations();
-
-		tree.insert(8);
-		tree.insert(3);
-		tree.insert(1);
-		tree.insert(6);
-		tree.insert(7);
-		tree.insert(10);
-		tree.insert(9);
-		tree.insert(14);
-		tree.insert(4);
-		tree.insert(5);
-
+		/*
+		 * 50 / \ 30 70 / \ / \ 20 40 60 80
+		 */
+		tree.insert(50);
+		tree.insert(30);
+		tree.insert(20);
+		tree.insert(40);
+		tree.insert(70);
+		tree.insert(60);
+		tree.insert(80);
 
 		System.out.print("Inorder traversal: ");
 		tree.inorder();
 
 		System.out.println("\n\nAfter deleting 10");
-		tree.deleteKey(3);
+		// tree.deleteKey(70);
 		System.out.print("Inorder traversal: ");
 		tree.inorder();
+
+		tree.rightView();
+		tree.lefttView();
 	}
 }
