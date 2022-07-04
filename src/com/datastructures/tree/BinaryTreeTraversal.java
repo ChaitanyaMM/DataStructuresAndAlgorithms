@@ -63,9 +63,9 @@ public class BinaryTreeTraversal {
 			return 0;
 		else {
 			int lheight = height(root.left);
-			System.out.println("lheight :-> "+lheight);
+			//System.out.println("lheight :-> "+lheight);
 			int rheight = height(root.right);
-			System.out.println("rheight :-> "+rheight);
+			//System.out.println("rheight :-> "+rheight);
 
 			if (lheight > rheight)
 				return (lheight + 1);

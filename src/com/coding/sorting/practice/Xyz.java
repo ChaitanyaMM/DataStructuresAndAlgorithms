@@ -1,4 +1,4 @@
-package com.algorithms.sorting;
+package com.coding.sorting.practice;
 
 
 @FunctionalInterface

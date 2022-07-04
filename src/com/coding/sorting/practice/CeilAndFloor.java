@@ -1,4 +1,4 @@
-package com.coding.practice;
+package com.coding.sorting.practice;
 
 public class CeilAndFloor {
 
@@ -143,7 +143,7 @@ public class CeilAndFloor {
 		int y1 = binaryfloorSearch(nums, 0, nums.length - 1, v);
 		System.out.println(nums[y1]);
 
-		floorAndCeil(nums2, 4);
+		floorAndCeil(nums2, 3);
 
 	}
 

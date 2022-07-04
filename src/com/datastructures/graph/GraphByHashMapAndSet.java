@@ -20,7 +20,7 @@ public class GraphByHashMapAndSet {
 	}
 
 	// Adds an edge to an undirected graph
-	public void addEdge(int src, int dest) {
+	public  void addEdge(int src, int dest) {
 
 		// Add an edge from src to dest into the set
 		graph.get(src).add(dest);

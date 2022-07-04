@@ -1,242 +1,433 @@
-//package com.datastructures.tree;
+package com.datastructures.tree;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+class BinaryTree {
+	int data;
+	BinaryTree left, right;
+
+	BinaryTree(int data) {
+		this.data = data;
+		this.left = this.right = null;
+
+	}
+
+	BinaryTree() {
+
+	}
+}
+
+public class BinaryTreeOperations {
+
+	static BinaryTree tree;
+
+	static void inOrderTraversal(BinaryTree root) {
+
+		if (root == null) {
+			return;
+		}
+		inOrderTraversal(root.left);
+		System.out.println(root.data + " ");
+		inOrderTraversal(root.right);
+
+	}
+
+	static void preOrderTraversal(BinaryTree root) {
+		if (root == null) {
+			return;
+		}
+		System.out.println(root.data + " ");
+		preOrderTraversal(root.left);
+		preOrderTraversal(root.right);
+
+	}
+
+	static void postOrderTraversal(BinaryTree root) {
+		if (root == null) {
+			return;
+		}
+		postOrderTraversal(root.left);
+		postOrderTraversal(root.right);
+		System.out.println(root.data + " ");
+	}
+
+	static void levelOrderTraversal(BinaryTree root) {
+		int height = height(root);
+
+		for (int i = 1; i <= height; i++) {
+
+			currentLevel(root, i);
+		}
+
+	}
+
+	static void currentLevel(BinaryTree node, int level) {
+
+		if (node == null) {
+			return;
+		}
+		if (level == 1) {
+			System.out.print(node.data + " ");
+		} else if (level > 1) {
+			currentLevel(node.left, level - 1);
+			currentLevel(node.right, level - 1);
+		}
+
+	}
+
+	static void insertData(int arr[], BinaryTree root) {
+		for (int i = 0; i < arr.length; i++) {
+			insert(root, arr[i]);
+		}
+
+	}
+	
+	static void insert(BinaryTree root, int key) {
+		BinaryTree temp = root;
+
+		if (temp == null) {
+			temp = new BinaryTree(key);
+		}
+
+		Queue<BinaryTree> q = new LinkedList<>();
+		q.add(temp);
+
+		while (!q.isEmpty()) {
+			temp = q.peek();
+			q.remove();
+
+			if (temp.left == null) {
+				temp.left = new BinaryTree(key);
+				break;
+
+			} else {
+				q.add(temp.left);
+			}
+			if (temp.right == null) {
+				temp.right = new BinaryTree(key);
+				break;
+			} else {
+				q.add(temp.right);
+			}
+
+		}
+
+	}
+
+	
+
+	static int countNodes(BinaryTree root) {
+		if (root != null)
+			return 1 + countNodes(root.left) + countNodes(root.right);
+		return 0;
+	}
+
+	static int sumNodesData(BinaryTree root) {
+		if (root != null)
+
+			return sumNodesData(root.left) + sumNodesData(root.right) + root.data;
+		return 0;
+	}
+
+	static int degree2nodes(BinaryTree root) {
+
+		if (root != null) {
+			int x = degree2nodes(root.left);
+			int y = degree2nodes(root.right);
+
+			if (root.left != null & root.right != null) {
+				return x + y + 1;
+			} else {
+				return x + y;
+
+			}
+		}
+		return 0;
+
+	}
+
+	static int height(BinaryTree root) { // recursive
+		if (root == null) {
+			return 0;
+		} else {
+			int leftChild = height(root.left);
+			// System.out.println("leftChild :-> " + leftChild);
+			int rightChild = height(root.right);
+			// System.out.println("rightChild :-> " + rightChild);
+
+			return leftChild > rightChild ? leftChild + 1 : rightChild + 1;
+
+		}
+
+	}
+
+	static int height_iterative(BinaryTree root) { // recursive
+		if (root == null) {
+			return 0;
+		}
+		BinaryTree temp;
+		Queue<BinaryTree> q = new LinkedList<>();
+		q.add(root);
+		int height = 0;
+
+		while (!q.isEmpty()) {
+			int count = q.size();
+			if (count == 0) {
+				return height;
+			}
+			height++;
+
+			while (count > 0) {
+				temp = q.peek();
+				q.remove();
+
+				if (temp.left != null) {
+					q.add(temp.left);
+				}
+
+				if (temp.right != null) {
+					q.add(temp.right);
+				}
+
+				count--;
+
+			}
+
+		}
+
+		return height;
+
+	}
+
+	static void searchKey(BinaryTree tree, int key) {
+		int level = 1;
+		if (tree != null) {
+			level++;
+
+			if (tree.data == key) {
+				level++;
+
+				System.out.println("found  key : " + key + " at level :" + level);
+			} else {
+				searchKey(tree.left, key);
+				searchKey(tree.right, key);
+
+			}
+
+		}
+	}
+
+	static void deleteDeepest(BinaryTree root, BinaryTree lastNode) {
+
+		Queue<BinaryTree> q = new LinkedList<>();
+		q.add(root);
+
+		BinaryTree temp;
+		while (!q.isEmpty()) {
+			temp = q.peek();
+			q.remove();
+
+			if (temp == lastNode) {
+				temp = null;
+				return;
+			}
+
+			if (temp.left != null) {
+				if (temp.left == lastNode) {
+					temp.left = null;
+					return;
+				} else {
+					q.add(temp.left);
+				}
+
+			}
+
+			if (temp.right != null) {
+				if (temp.right == lastNode) {
+					temp.right = null;
+					return;
+				} else {
+					q.add(temp.right);
+				}
+
+			}
+
+		}
+
+	}
+
+	static void delete(BinaryTree tree, int key) {
+
+		if (tree != null) {
+
+			if (tree.left == null && tree.right == null) {
+				if (tree.data == key) {
+					tree = null;
+					return;
+				} else
+					return;
+			}
+
+			Queue<BinaryTree> q = new LinkedList<>();
+			q.add(tree);
+			BinaryTree temp = null;
+			BinaryTree keyNodetoDelete = null;
+
+			while (!q.isEmpty()) {
+				temp = q.peek();
+				q.remove();
+
+				if (temp.data == key) {
+					keyNodetoDelete = temp;
+				}
+				if (temp.left != null)
+					q.add(temp.left);
+
+				if (temp.right != null)
+					q.add(temp.right);
+
+			}
+
+			if (keyNodetoDelete != null) {
+				int x = temp.data;
+				System.out.println("x :{} "+x);
+				deleteDeepest(tree, temp);
+				keyNodetoDelete.data = x;
+
+			}
+
+		}
+
+	}
+
+	public static int findLevel(BinaryTree root, int x, int index, int level) {
+		// return if the tree is empty or level is already found
+		if (root == null || level != 0) {
+			return level;
+		}
+
+		if (root.data == x) {
+			level = index;
+
+		}
+
+		level = findLevel(root.left, x, index + 1, level);
+		level = findLevel(root.right, x, index + 1, level);
+
+		return level;
+	}
+
+	static void printcousins(BinaryTree root, int key, int level) {
+
+		if (root != null) {
+
+			if (level == 1) {
+				System.out.println("cousins " + root.data + " ");
+
+			}
+			if (!(root.left != null && root.left.data == key || root.right != null && root.right.data == key)) {
+				printcousins(root.left, key, level - 1);
+				printcousins(root.right, key, level - 1);
+
+			}
+		}
+
+	}
+
+	static void getCousinsOfGivenNode(BinaryTree root, int key) {
+
+		int level = findLevel(root, key, 1, 0);
+
+		printcousins(root, key, level);
+
+	}
+
+	static int getSibilingsOfGivenNode(BinaryTree root, int key) {
+		int sibiling = 0;
+
+		if (root != null) {
+
+			if (root.data == key) {
+				System.out.println("Given key is root it wont have sibilings");
+
+			}
+			Queue<BinaryTree> q = new LinkedList<>();
+			q.add(root);
+			BinaryTree temp;
+			while (!q.isEmpty()) {
+
+				temp = q.peek();
+				q.remove();
+
+				if (temp.left != null) {
+					if (temp.left.data == key) {
+						sibiling = temp.right.data;
+					}
+					q.add(temp.left);
+				}
+				if (temp.right != null) {
+					if (temp.right.data == key) {
+						sibiling = temp.left.data;
+					}
+					q.add(temp.right);
+				}
+
+			}
+
+		}
+		return sibiling;
+
+	}
+
+	public static void main(String[] args) {
+
+		tree = new BinaryTree(10);
+
+		int[] arr = { 20, 30, 40, 50, 60, 70 };
+ 
+		insertData(arr, tree);
+		System.out.println();
+
+//		inOrderTraversal(tree);
+//		System.out.println();
+//		
+//		preOrderTraversal(tree);
+//		System.out.println();
 //
-//import java.util.LinkedList;
-//import java.util.Queue;
-//
-//class NodeBinarayTree {
-//	int data;
-//	NodeBinarayTree left;
-//	NodeBinarayTree right;
-//
-//	NodeBinarayTree(int key) {
-//		this.data = key;
-//		this.left = this.right = null;
-//	}
-//
-//}
-//
-//public class BinaryTreeOperations {
-//	NodeBinarayTree root;
-//
-//	static void inOrder(NodeBinarayTree root) {
-//		if (root != null) {
-//			inOrder(root.left);
-//			System.out.println("" + root.data + " ");
-//			inOrder(root.right);
-//
-//		}
-//
-//	}
-//
-//	// Function to delete deepest
-//	// element in binary tree
-//	static void deleteDeepest(NodeBinarayTree root, NodeBinarayTree delNode) {
-//		Queue<NodeBinarayTree> q = new LinkedList<NodeBinarayTree>();
-//		q.add(root);
-//
-//		NodeBinarayTree temp = null;
-//
-//		// Do level order traversal until last node
-//		while (!q.isEmpty()) {
-//			temp = q.peek();
-//			q.remove();
-//
-//			if (temp == delNode) {
-//				temp = null;
-//				return;
-//
-//			}
-//			if (temp.right != null) {
-//				if (temp.right == delNode) {
-//					temp.right = null;
-//					return;
-//				} else
-//					q.add(temp.right);
-//			}
-//
-//			if (temp.left != null) {
-//				if (temp.left == delNode) {
-//					temp.left = null;
-//					return;
-//				} else
-//					q.add(temp.left);
-//			}
-//		}
-//	}
-//
-//	static void delete(NodeBinarayTree node, int key) {
-//		if (node == null) {
-//			return;
-//		}
-//
-//		if (node.left == null && node.right == null) {
-//			if (node.data == key) {
-//				node = null;
-//				return;
-//			} else
-//				return;
-//		}
-//
-//		Queue<NodeBinarayTree> q = new LinkedList<NodeBinarayTree>();
-//		q.add(node);
-//		NodeBinarayTree temp = null, keyNode = null;
-//
-//		System.out.println("size of queue :" + q.size());
-//		// Do level order traversal until
-//		// we find key and last node.
-//		while (!q.isEmpty()) {
-//			temp = q.peek();
-//			System.out.println("temp data :-> " + temp.data);
-//			q.remove();
-//
-//			if (temp.data == key)
-//				keyNode = temp;
-//
-//			if (temp.left != null)
-//				q.add(temp.left);
-//
-//			if (temp.right != null)
-//				q.add(temp.right);
-//		}
-//
-//		if (keyNode != null) {
-//			int x = temp.data;
-//			System.out.println("node data " + keyNode.data + "temp data " + temp.data);
-//			deleteDeepest(node, temp);
-//			keyNode.data = x;
-//		}
-//
-//	}
-//
-//	static void levelOrder(NodeBinarayTree root) {
-//		int h = height(root);
-//		int i;
-//		for (i = 1; i <= h; i++)
-//			currentLevel(root, i);
-//	}
-//
-//	static void currentLevel(NodeBinarayTree node, int level) {
-//
-//		if (node == null) {
-//			return;
-//		}
-//		if (level == 1) {
-//			System.out.print(node.data + " ");
-//		} else if (level > 1) {
-//			currentLevel(node.left, level - 1);
-//			currentLevel(node.right, level - 1);
-//		}
-//
-//	}
-//
-//	static int height(NodeBinarayTree node) {
-//		if (node == null) {
-//			// System.out.println("empty Node");
-//			return 0;
-//		} else {
-//			int leftChild = height(node.left);
-//			System.out.println("leftChild :-> " + leftChild);
-//			int rightChild = height(node.right);
-//			System.out.println("rightChild :-> " + rightChild);
-//
-//			return leftChild > rightChild ? leftChild + 1 : rightChild + 1;
-//
-//		}
-//
-//	}
-//
-//	static int countNodes(NodeBinarayTree root) {
-//		if (root != null)
-//			return countNodes(root.left) + countNodes(root.right) + 1;
-//		return 0;
-//
-//	}
-//
-//	static int sumofNodesData(NodeBinarayTree root) {
-//		if (root != null)
-//			return sumofNodesData(root.left) + sumofNodesData(root.right) + root.data;
-//		return 0;
-//
-//	}
-//
-//	static int searchNode(NodeBinarayTree root, int key) {
-//
-//		int level = 0;
-//		if (root == null) {
-//			return -1;
-//		}
-//		if (root.data == key) {
-//			System.out.println( "key :-> " +key);
-//			return key;
-//		}	
-//
-//		int left = searchNode(root.left, key);
-//		System.out.println("left :-> "+left);
-//		int right = searchNode(root.right, key);
-//		System.out.println("right :-> "+right);
-//
-//		return left >right ? left: right;
-//
-//	}
-//
-//	static void getCousinsofNode(NodeBinarayTree root, int key) {
-//
-//		if (root == null) {
-//			return;
-//		} else {
-//			int height = height(root);
-//
-//		}
-//
-//	}
-//
-//	static void getSibilingOfNode(NodeBinarayTree root, int key) {
-//
-//	}
-//
-//	public static void main(String[] args) {
-//		// 1
-//		// 2 3
-//		// 4 5 6 7
-//		// 8 9
-//		NodeBinarayTree binaryTree = new NodeBinarayTree(1);
-//		binaryTree.left = new NodeBinarayTree(2);
-//		binaryTree.right = new NodeBinarayTree(3);
-//		binaryTree.left.left = new NodeBinarayTree(4);
-//		binaryTree.left.right = new NodeBinarayTree(5);
-////		binaryTree.right.left = new NodeBinarayTree(6);
-////		binaryTree.right.right = new NodeBinarayTree(7);
-////		
-////		binaryTree.right.left.left = new NodeBinarayTree(8);
-////		binaryTree.right.left.right = new NodeBinarayTree(9);
-////		
-//
-////		inOrder(binaryTree);
-////		System.out.println("===================");
-//
-////		int height =height(binaryTree);
-////		System.out.println(height+ "");
-////		
-////		System.out.println("===================");
-////
-////		levelOrder(binaryTree);
-//
-////		System.out.println("===================");
-////		int countNodes =countNodes(binaryTree);
-////		System.out.println("nodes Count :-> " +countNodes);
-////		
-////		System.out.println("===================");
-////		int sumofNodesDaata =sumofNodesData(binaryTree);
-////		System.out.println("sumofNodesDaata :-> " +sumofNodesDaata);
-//
-////		delete(binaryTree, 2);
-////
-////		System.out.println("===================");
-////
-////		levelOrder(binaryTree);
-////		
-//		searchNode(binaryTree,3);
-//
-//	}
-//
-//}
+//		
+//		postOrderTraversal(tree);
+//		System.out.println();
+
+		int height = height(tree);
+		System.out.println("========= " + height);
+//		int height2 = height_iterative(tree);
+//		System.out.println("========= " + height2);
+
+		levelOrderTraversal(tree);
+
+		searchKey(tree, 70);
+
+		int nodes = countNodes(tree);
+		System.out.println("nodes" + nodes);
+		int sumNodes = sumNodesData(tree);
+		System.out.println("sumNodes" + sumNodes);
+
+		int result = degree2nodes(tree);
+		System.out.println("result " + result);
+
+		inOrderTraversal(tree);
+
+		int sibiling = getSibilingsOfGivenNode(tree, 70);
+		System.out.println("sibiling " + sibiling);
+
+		getCousinsOfGivenNode(tree, 40);
+
+		System.out.println();
+
+		delete(tree, 40);
+		preOrderTraversal(tree);
+
+	}
+
+}

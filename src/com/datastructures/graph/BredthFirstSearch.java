@@ -64,6 +64,6 @@ public class BredthFirstSearch {
 
 		System.out.println("Following is Breadth First Traversal " + "(starting from vertex 2)");
 
-		g.BFS(3);
+		g.BFS(0);
 	}
 }

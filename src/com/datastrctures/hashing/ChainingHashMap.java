@@ -1,7 +1,5 @@
 package com.datastrctures.hashing;
 
-import com.datastrctures.hashing.HashTable;
-
 public class ChainingHashMap {
 
 	private static final int size = 100;

@@ -93,7 +93,7 @@ public class StackLinkedListOperations {
 		s.push(20);
 		s.push(30);
 
-		//s.pop();
+		s.pop();
 
 		//s.peek();
 

@@ -28,7 +28,7 @@ public class ArrayOperations {
 		}
 	}
 
-	public static void insert(int arr[], int x, int pos) {
+	public static void insert(int arr[], int x, int pos) {  
 		System.out.println("================================");
 
 		System.out.println("****** insert method ******** ");
@@ -65,7 +65,7 @@ public class ArrayOperations {
 
 	   int[] array = new int[n-1];
 	 
-	   for(int i=0,j=0;i<n;i++) {
+	   for(int i=0,j=0;i<n;i++) {   
 		   if(i==pos) {
 			   continue;
 		   }else {

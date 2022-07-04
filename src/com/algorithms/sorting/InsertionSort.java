@@ -14,7 +14,7 @@ public class InsertionSort {
 			while (j >= 0 && temp <= a[j])
 			{
 				a[j + 1] = a[j];
-				j = j - 1;
+				j --;
 			}
 			a[j + 1] = temp;
 		}

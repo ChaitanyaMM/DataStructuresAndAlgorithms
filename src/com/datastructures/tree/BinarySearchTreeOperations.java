@@ -134,7 +134,7 @@ public class BinarySearchTreeOperations {
 	public static void main(String[] args) {
 		BinarySearchTreeOperations tree = new BinarySearchTreeOperations();
 		/*
-		 * 50 / \ 30 70 / \ / \ 20 40 60 80
+		 *      50 / \ 30 70 / \ / \ 20 40 60 80
 		 */
 		tree.insert(50);
 		tree.insert(30);
@@ -147,8 +147,8 @@ public class BinarySearchTreeOperations {
 		System.out.print("Inorder traversal: ");
 		tree.inorder();
 
-		System.out.println("\n\nAfter deleting 10");
-		// tree.deleteKey(70);
+		System.out.println("\n\nAfter deleting 70");
+		tree.deleteKey(30);
 		System.out.print("Inorder traversal: ");
 		tree.inorder();
 
