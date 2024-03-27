@@ -31,7 +31,7 @@ public class StackArrayOperations {
 
 	}
 
-	public static int pop(Stack stack) {
+	public static int pop(Stack stack) { //delete
 		int x = 0;
 		if (stack.top < 0) {
 			System.out.println("stack is underflow");
@@ -44,7 +44,7 @@ public class StackArrayOperations {
 
 	}
 
-	public static int peek(Stack stack) {
+	public static int peek(Stack stack) { //knowing the value not deleting
 		int x = 0;
 		if (stack.top < 0) {
 			System.out.println("stack underflow");

@@ -30,6 +30,15 @@ public class LinkedListOperations {
 
 	}
 
+	public static void displayRecursively(Node head) {
+
+		if (head != null) {
+			System.out.println("data :" + head.data);
+			displayRecursively(head.next);
+		}
+
+	}
+
 	public static void delete(int pos) {
 		Node node = first;
 
@@ -95,33 +104,28 @@ public class LinkedListOperations {
 
 	}
 
-	public static void reverseFromAPoint( int pos) {
+	public static void reverseFromAPoint(int pos) {
 		System.out.println("reverseFromAPoint");
-		Node node =first;
-		Node head =new Node();
-		Node reverseNode = null,first = null;
-		int count =0;
-		while(node!=null) {
-		
-			
+		Node node = first;
+		Node head = new Node();
+		Node reverseNode = null, first = null;
+		int count = 0;
+		while (node != null) {
+
 			reverseNode = new Node();
-			reverseNode.data=node.data;
-			reverseNode.next =null;
- 
-			
-			
-			
+			reverseNode.data = node.data;
+			reverseNode.next = null;
+
 //			Node temp = new Node();
 //			temp.data = node.data;
 //			temp.next = reverseNode;
 //			reverseNode = temp;
 
-			
-			node=node.next;
-			count ++;
-			
+			node = node.next;
+			count++;
+
 		}
-		
+
 		traverse(reverseNode);
 		System.out.println("=====================");
 

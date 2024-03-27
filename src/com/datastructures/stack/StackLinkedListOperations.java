@@ -80,7 +80,7 @@ public class StackLinkedListOperations {
 
 		while(!s.isEmpty()) {
 			
-			//s2.push(s.peek()); 
+			//s2.push(s.peek()); 	
 			System.out.println("print values :-> "+s.peek() +" ");
 			s.pop();
 			
