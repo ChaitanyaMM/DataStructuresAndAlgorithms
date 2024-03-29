@@ -53,7 +53,7 @@ public class StackArrayOperations {
 			x = stack.data[stack.top];
 		}
 
-		System.out.println("======================================" + x);
+		System.out.println("peek ======================================" + x);
 
 		return x;
 
